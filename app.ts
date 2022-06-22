@@ -8,7 +8,7 @@ router.get("/", (context) => {
   context.response.body = {
     "name": "The yard",
     "description":
-      "You are standing in the yard of an old house located on the outsikrts of the city of Shelboune somewhere in New England. It's automn o 1923.",
+      "You are standing in the yard of an old house located on the outsikrts of the city of Shelboune somewhere in New England. It's autumn o 1923.",
     "links": [{ "href": "/old-barn", "type": "GET" }],
   };
 });
