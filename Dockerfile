@@ -1,16 +1,11 @@
 FROM denoland/deno:1.23.1
 
-# The port that your application listens to.
-EXPOSE 8000
-
 WORKDIR /app
-# WORKDIR .
 
 COPY ./src /app
 
 # Prefer not to run as root.
 USER deno
 
-# CMD "ls"
-
-CMD ["run", "--allow-net", "server.ts"]
+# Pass port argument if running on remote host (Heroku)
+CMD deno run --allow-net --allow-read --allow-env server.ts --port=$PORT
