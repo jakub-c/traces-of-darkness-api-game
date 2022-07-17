@@ -16,3 +16,13 @@ it("/ should point player to the yard", async () => {
     assertObjectMatch(response.body, expected);
   });
 });
+
+it("/house should return a link to the corridor", async () => {
+  const expected = {
+    "links": [{ "href": "/old-house/corridor", "type": "GET" }],
+  };
+
+  await request.get("/old-house").expect(200).then((response: any) => {
+    assertObjectMatch(response.body, expected);
+  });
+});
