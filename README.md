@@ -1,5 +1,7 @@
 # Traces of darkness
 
+![Github Actions CI status](https://github.com/jakub-c/traces-of-darkness-api-game/actions/workflows/build.yml//badge.svg)
+
 This is an attempt to use RESTful API as a game engine. Two main goals behind this project are:
 
 * see if it's possible to create an adventure game with a REST based interface
