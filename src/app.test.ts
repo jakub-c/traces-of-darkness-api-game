@@ -1,10 +1,14 @@
 import { assertObjectMatch } from "https://deno.land/std@0.144.0/testing/asserts.ts";
 import { beforeEach, it } from "https://deno.land/std@0.144.0/testing/bdd.ts";
-import { superoak } from "https://deno.land/x/superoak@4.7.0/mod.ts";
+import {
+  IResponse,
+  SuperDeno,
+  superoak,
+} from "https://deno.land/x/superoak@4.7.0/mod.ts";
 
 import { app } from "./app.ts";
 
-let request: any;
+let request: SuperDeno;
 beforeEach(async () => {
   request = await superoak(app);
 });
@@ -12,7 +16,7 @@ beforeEach(async () => {
 it("/ should point player to the yard", async () => {
   const expected = { "name": "The yard" };
 
-  await request.get("/").expect(200).then((response: any) => {
+  await request.get("/").expect(200).then((response: IResponse) => {
     assertObjectMatch(response.body, expected);
   });
 });
@@ -22,7 +26,7 @@ it("/house should return a link to the corridor", async () => {
     "links": [{ "href": "/old-house/corridor", "type": "GET" }],
   };
 
-  await request.get("/old-house").expect(200).then((response: any) => {
+  await request.get("/old-house").expect(200).then((response: IResponse) => {
     assertObjectMatch(response.body, expected);
   });
 });
