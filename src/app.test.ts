@@ -29,7 +29,7 @@ it("/old-house", async () => {
   });
 });
 
-it("/house should return a link to the corridor", async () => {
+it("/old-house should return a link to the corridor", async () => {
   const expected = {
     "links": [{ "href": "/old-house/corridor", "type": "GET" }],
   };
