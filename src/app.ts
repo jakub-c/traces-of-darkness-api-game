@@ -2,17 +2,31 @@ import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 
 export const app = new Application();
 
-const corridor = {
+type mapLocation = {
+  endpoint: string;
+  name: string;
+  description: string;
+  connections: mapLocationContainer[];
+};
+
+type mapLocationContainer = {
+  location: mapLocation;
+};
+
+const corridor: mapLocationContainer = {
   "location": {
     "endpoint": "corridor",
     "name": "corridor",
+    "description": "....",
+    "connections": [],
   },
 };
 
-const house = {
+const house: mapLocationContainer = {
   "location": {
     "endpoint": "/old-house",
     "name": "Old House",
+    "description": "....",
     "connections": [corridor],
   },
 };
@@ -29,10 +43,12 @@ const map = {
 const router = new Router();
 
 const generateLocationEndpoint = (
-  location: Record<string, any>,
+  location: mapLocation,
   urlSlug: string,
 ) => {
-  const connectionsLinks = location.connections.map((nextArea: any) => ({
+  const connectionsLinks = location.connections.map((
+    nextArea: mapLocationContainer,
+  ) => ({
     "href": `${urlSlug}/${nextArea.location.endpoint}`,
     "type": "GET",
   }));
@@ -46,10 +62,10 @@ const generateLocationEndpoint = (
   });
 };
 
-const buildApi = (location: Record<string, any>) => {
+const buildApi = (location: mapLocation) => {
   generateLocationEndpoint(location, location.endpoint);
   if (location.connections) {
-    location.connections.forEach((nextArea: any) => {
+    location.connections.forEach((nextArea: mapLocationContainer) => {
       generateLocationEndpoint(nextArea.location, nextArea.location.endpoint);
     });
   }
