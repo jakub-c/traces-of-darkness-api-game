@@ -24,7 +24,7 @@ const corridor: mapLocationContainer = {
 
 const house: mapLocationContainer = {
   "location": {
-    "endpoint": "/old-house",
+    "endpoint": "old-house",
     "name": "Old House",
     "description": "....",
     "connections": [corridor],
@@ -33,7 +33,7 @@ const house: mapLocationContainer = {
 
 const map = {
   "location": {
-    "endpoint": "/",
+    "endpoint": "",
     "name": "The yard",
     "description": "....",
     "connections": [house],
@@ -48,12 +48,19 @@ const generateLocationEndpoint = (
 ) => {
   const connectionsLinks = location.connections.map((
     nextArea: mapLocationContainer,
-  ) => ({
-    "href": `${urlSlug}/${nextArea.location.endpoint}`,
-    "type": "GET",
-  }));
+  ) => {
+    /* if there's more than one backslash like /// in a url, replace it with a single one */
+    const url = `/${urlSlug}/${nextArea.location.endpoint}`.replace(/\/+/, "/");
 
-  router.get(location.endpoint, (context) => {
+    const link = {
+      "href": url,
+      "type": "GET",
+    };
+
+    return link;
+  });
+
+  router.get(`/${location.endpoint}`, (context) => {
     context.response.type = "application/json";
     context.response.body = {
       "name": location.name,
