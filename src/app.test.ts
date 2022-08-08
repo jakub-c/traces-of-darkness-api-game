@@ -14,7 +14,10 @@ beforeEach(async () => {
 });
 
 it("/ should point player to the yard", async () => {
-  const expected = { "name": "The yard" };
+  const expected = {
+    "name": "The yard",
+    "links": [{ "href": "/old-house", "type": "GET" }],
+  };
 
   await request.get("/").expect(200).then((response: IResponse) => {
     assertObjectMatch(response.body, expected);
@@ -22,15 +25,8 @@ it("/ should point player to the yard", async () => {
 });
 
 it("/old-house", async () => {
-  const expected = { "name": "Old House" };
-
-  await request.get("/old-house").expect(200).then((response: IResponse) => {
-    assertObjectMatch(response.body, expected);
-  });
-});
-
-it("/old-house should return a link to the corridor", async () => {
   const expected = {
+    "name": "Old House",
     "links": [{ "href": "/old-house/corridor", "type": "GET" }],
   };
 
