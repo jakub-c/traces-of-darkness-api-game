@@ -1,4 +1,4 @@
-# Traces of darkness
+# Traces of darkness ^(;·⁏)^
 
 ![Github Actions CI status](https://github.com/jakub-c/traces-of-darkness-api-game/actions/workflows/build.yml//badge.svg)
 
