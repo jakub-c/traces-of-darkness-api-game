@@ -6,38 +6,28 @@ type mapLocation = {
   endpoint: string;
   name: string;
   description: string;
-  connections: mapLocationContainer[];
+  connections: mapLocation[];
 };
 
-type mapLocationContainer = {
-  location: mapLocation;
+const corridor: mapLocation = {
+  "endpoint": "corridor",
+  "name": "corridor",
+  "description": "....",
+  "connections": [],
 };
 
-const corridor: mapLocationContainer = {
-  "location": {
-    "endpoint": "corridor",
-    "name": "corridor",
-    "description": "....",
-    "connections": [],
-  },
+const house: mapLocation = {
+  "endpoint": "old-house",
+  "name": "Old House",
+  "description": "....",
+  "connections": [corridor],
 };
 
-const house: mapLocationContainer = {
-  "location": {
-    "endpoint": "old-house",
-    "name": "Old House",
-    "description": "....",
-    "connections": [corridor],
-  },
-};
-
-const map = {
-  "location": {
-    "endpoint": "",
-    "name": "The yard",
-    "description": "....",
-    "connections": [house],
-  },
+const map: mapLocation = {
+  "endpoint": "",
+  "name": "The yard",
+  "description": "....",
+  "connections": [house],
 };
 
 const router = new Router();
@@ -47,10 +37,10 @@ const generateLocationEndpoint = (
   urlSlug: string,
 ) => {
   const connectionsLinks = location.connections.map((
-    nextArea: mapLocationContainer,
+    nextArea: mapLocation,
   ) => {
     /* if there's more than one backslash like /// in a url, replace it with a single one */
-    const url = `/${urlSlug}/${nextArea.location.endpoint}`.replace(/\/+/, "/");
+    const url = `/${urlSlug}/${nextArea.endpoint}`.replace(/\/+/, "/");
 
     const link = {
       "href": url,
@@ -72,13 +62,13 @@ const generateLocationEndpoint = (
 const buildApi = (location: mapLocation) => {
   generateLocationEndpoint(location, location.endpoint);
   if (location.connections) {
-    location.connections.forEach((nextArea: mapLocationContainer) => {
-      generateLocationEndpoint(nextArea.location, nextArea.location.endpoint);
+    location.connections.forEach((nextArea: mapLocation) => {
+      generateLocationEndpoint(nextArea, nextArea.endpoint);
     });
   }
 };
 
-buildApi(map.location);
+buildApi(map);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
