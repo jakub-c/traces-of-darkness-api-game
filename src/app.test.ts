@@ -19,9 +19,11 @@ it("/ should point player to the yard", async () => {
     "links": [{ "href": "/old-house", "type": "GET" }],
   };
 
-  await request.get("/").expect(200).then((response: IResponse) => {
-    assertObjectMatch(response.body, expected);
-  });
+  await request.get("/")
+    .expect(200)
+    .then((response: IResponse) => {
+      assertObjectMatch(response.body, expected);
+    });
 });
 
 it("/old-house", async () => {
@@ -30,7 +32,9 @@ it("/old-house", async () => {
     "links": [{ "href": "/old-house/corridor", "type": "GET" }],
   };
 
-  await request.get("/old-house").expect(200).then((response: IResponse) => {
-    assertObjectMatch(response.body, expected);
-  });
+  await request.get("/old-house")
+    .expect(200)
+    .then((response: IResponse) => {
+      assertObjectMatch(response.body, expected);
+    });
 });
