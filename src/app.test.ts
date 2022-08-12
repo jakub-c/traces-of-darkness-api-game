@@ -1,4 +1,7 @@
-import { assertObjectMatch } from "https://deno.land/std@0.144.0/testing/asserts.ts";
+import {
+  assertObjectMatch,
+  assertStringIncludes,
+} from "https://deno.land/std@0.144.0/testing/asserts.ts";
 import { beforeEach, it } from "https://deno.land/std@0.144.0/testing/bdd.ts";
 import {
   IResponse,
@@ -20,8 +23,13 @@ it("/ should point player to the yard", async () => {
   };
 
   await request.get("/")
+    // .set("Accept", "application/json")
     .expect(200)
     .then((response: IResponse) => {
+      assertStringIncludes(
+        String(response.header["content-type"]),
+        "application/json",
+      );
       assertObjectMatch(response.body, expected);
     });
 });
