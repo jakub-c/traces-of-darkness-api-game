@@ -24,6 +24,6 @@ The game will be available at `localhost:8000`
 
 If you want to add new features:
 
-`deno task server` runs the server locally
+`deno task server` and `deno task server:watch` run the server locally
 
-`deno task t` runs the tests with `--allow-net` flag
+`deno task t` and `deno task t:watch` run the tests with `--allow-net` flag
