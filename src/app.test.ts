@@ -2,7 +2,11 @@ import {
   assertObjectMatch,
   assertStringIncludes,
 } from "https://deno.land/std@0.144.0/testing/asserts.ts";
-import { beforeEach, it } from "https://deno.land/std@0.144.0/testing/bdd.ts";
+import {
+  beforeEach,
+  describe,
+  it,
+} from "https://deno.land/std@0.144.0/testing/bdd.ts";
 import {
   IResponse,
   SuperDeno,
@@ -16,22 +20,25 @@ beforeEach(async () => {
   request = await superoak(app);
 });
 
-it("/ should point player to the yard", async () => {
-  const expected = {
-    "name": "The yard",
-    "links": [{ "href": "/old-house", "type": "GET" }],
-  };
+describe("root endpoint /", () => {
+  it("has a right 'links' response", async () => {
+    const expected = {
+      "name": "The yard",
+      "links": [{ "href": "/old-house", "type": "GET" }],
+    };
 
-  await request.get("/")
-    // .set("Accept", "application/json")
-    .expect(200)
-    .then((response: IResponse) => {
-      assertStringIncludes(
-        String(response.header["content-type"]),
-        "application/json",
-      );
-      assertObjectMatch(response.body, expected);
-    });
+    await request.get("/")
+      // .set("Accept", "application/json")
+      .expect(200)
+      .then((response: IResponse) => {
+        assertStringIncludes(
+          String(response.header["content-type"]),
+          "application/json",
+        );
+        assertObjectMatch(response.body, expected);
+      });
+  });
+
 });
 
 it("/old-house", async () => {
