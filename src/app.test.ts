@@ -39,6 +39,17 @@ describe("root endpoint /", () => {
       });
   });
 
+  it("returns image when requested", async () => {
+    await request.get("/")
+      .set("Accept", "image/*")
+      .expect(200)
+      .then((response: IResponse) => {
+        assertStringIncludes(
+          String(response.header["content-type"]),
+          "image/",
+        );
+      });
+  });
 });
 
 it("/old-house", async () => {
