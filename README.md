@@ -27,3 +27,7 @@ If you want to add new features:
 `deno task server` and `deno task server:watch` run the server locally
 
 `deno task t` and `deno task t:watch` run the tests with `--allow-net` flag
+
+### Credits
+
+Media used in this project come from the archives of [Library of Congress](https://www.loc.gov)
