@@ -6,6 +6,7 @@ type mapLocation = {
   endpoint: string;
   name: string;
   description: string;
+  image?: string;
   connections: mapLocation[];
 };
 
@@ -27,6 +28,8 @@ const map: mapLocation = {
   "endpoint": "",
   "name": "The yard",
   "description": "....",
+  "image":
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/ca/ca1300/ca1345/photos/020399pv.jpg",
   "connections": [house],
 };
 
@@ -50,12 +53,21 @@ const generateLocationEndpoint = (
     return link;
   });
 
-  router.get(`/${location.endpoint}`, (context) => {
-    context.response.type = "application/json";
-    context.response.body = {
-      "name": location.name,
-      "links": connectionsLinks,
-    };
+  router.get(`/${location.endpoint}`, async (context) => {
+    if (
+      context.request.accepts()?.some((el) => el.includes("image/*")) &&
+      location.image
+    ) {
+      const resp = await fetch(location.image);
+      context.response.type = "image/jpeg";
+      context.response.body = resp.body;
+    } else {
+      context.response.type = "application/json";
+      context.response.body = {
+        "name": location.name,
+        "links": connectionsLinks,
+      };
+    }
   });
 };
 
