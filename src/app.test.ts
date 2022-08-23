@@ -23,7 +23,7 @@ beforeEach(async () => {
 });
 
 describe("root endpoint /", () => {
-  it("has a right 'links' response", async () => {
+  it("has the right 'links' response", async () => {
     const expected = {
       "name": "The yard",
       "links": [{ "href": "/old-house", "type": "GET" }],
@@ -59,15 +59,17 @@ describe("root endpoint /", () => {
   });
 });
 
-it("/old-house", async () => {
-  const expected = {
-    "name": "Old House",
-    "links": [{ "href": "/old-house/corridor", "type": "GET" }],
-  };
+describe("/old-house enpoint", () => {
+  it("has the right 'links' response", async () => {
+    const expected = {
+      "name": "Old House",
+      "links": [{ "href": "/old-house/corridor", "type": "GET" }],
+    };
 
-  await request.get("/old-house")
-    .expect(200)
-    .then((response: IResponse) => {
-      assertObjectMatch(response.body, expected);
-    });
+    await request.get("/old-house")
+      .expect(200)
+      .then((response: IResponse) => {
+        assertObjectMatch(response.body, expected);
+      });
+  });
 });
