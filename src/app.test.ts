@@ -73,3 +73,10 @@ describe("/old-house enpoint", () => {
       });
   });
 });
+
+describe("/corridor enpoint", () => {
+  it("returns 200 reponse", async () => {
+    await request.get("/corridor")
+      .expect(200);
+  });
+});
