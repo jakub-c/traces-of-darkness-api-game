@@ -24,7 +24,7 @@ const house: mapLocation = {
   "connections": [corridor],
 };
 
-const map: mapLocation = {
+const yard: mapLocation = {
   "endpoint": "",
   "name": "The yard",
   "description": "....",
@@ -35,15 +35,14 @@ const map: mapLocation = {
 
 const router = new Router();
 
-const generateLocationEndpoint = (
-  location: mapLocation,
-  urlSlug: string,
-) => {
-  const connectionsLinks = location.connections.map((
-    nextArea: mapLocation,
-  ) => {
-    /* if there's more than one backslash like /// in a url, replace it with a single one */
-    const url = `/${urlSlug}/${nextArea.endpoint}`.replace(/\/+/, "/");
+function generateLocationEndpoint(location: mapLocation): void {
+  const HATEOASlinks = location.connections.map((nextArea: mapLocation) => {
+    /* if there's more than one backslash like /// in a url,
+    replace it with a single one */
+    const url = `/${location.endpoint}/${nextArea.endpoint}`.replace(
+      /\/+/,
+      "/",
+    );
 
     const link = {
       "href": url,
@@ -65,22 +64,17 @@ const generateLocationEndpoint = (
       context.response.type = "application/json";
       context.response.body = {
         "name": location.name,
-        "links": connectionsLinks,
+        "links": HATEOASlinks,
       };
     }
   });
-};
 
-const buildApi = (location: mapLocation) => {
-  generateLocationEndpoint(location, location.endpoint);
-  if (location.connections) {
-    location.connections.forEach((nextArea: mapLocation) => {
-      generateLocationEndpoint(nextArea, nextArea.endpoint);
-    });
-  }
-};
+  return location.connections.forEach((connection: mapLocation) =>
+    generateLocationEndpoint(connection)
+  );
+}
 
-buildApi(map);
+generateLocationEndpoint(yard);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
