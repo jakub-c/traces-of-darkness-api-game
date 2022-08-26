@@ -34,6 +34,7 @@ function generateLocationEndpoint(location: mapLocation): void {
       context.response.type = "application/json";
       context.response.body = {
         "name": location.name,
+        "description": location.description,
         "links": HATEOASlinks,
       };
     }
