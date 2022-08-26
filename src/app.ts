@@ -1,37 +1,7 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { mapLocation, yard } from "./map.ts";
 
 export const app = new Application();
-
-type mapLocation = {
-  endpoint: string;
-  name: string;
-  description: string;
-  image?: string;
-  connections: mapLocation[];
-};
-
-const corridor: mapLocation = {
-  "endpoint": "corridor",
-  "name": "corridor",
-  "description": "....",
-  "connections": [],
-};
-
-const house: mapLocation = {
-  "endpoint": "old-house",
-  "name": "Old House",
-  "description": "....",
-  "connections": [corridor],
-};
-
-const yard: mapLocation = {
-  "endpoint": "",
-  "name": "The yard",
-  "description": "....",
-  "image":
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/ca/ca1300/ca1345/photos/020399pv.jpg",
-  "connections": [house],
-};
 
 const router = new Router();
 
