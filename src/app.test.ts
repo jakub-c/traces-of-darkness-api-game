@@ -1,4 +1,5 @@
 import {
+  assert,
   AssertionError,
   assertObjectMatch,
   assertStringIncludes,
@@ -38,6 +39,7 @@ describe("root endpoint /", () => {
           "application/json",
         );
         assertObjectMatch(response.body, expected);
+        assert(response.body.description.length > 0);
       });
   });
 
