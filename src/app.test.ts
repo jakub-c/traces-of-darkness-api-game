@@ -1,5 +1,7 @@
 import {
   assert,
+  assertArrayIncludes,
+  assertEquals,
   AssertionError,
   assertObjectMatch,
   assertStringIncludes,
@@ -62,16 +64,23 @@ describe("root endpoint /", () => {
 });
 
 describe("/old-house enpoint", () => {
+  it("has Old house name property", async () => {
+    await request.get("/old-house")
+      .expect(200)
+      .then((response: IResponse) => {
+        assertEquals(response.body.name, "Old House");
+      });
+  });
+
   it("has the right 'links' response", async () => {
-    const expected = {
-      "name": "Old House",
-      "links": [{ "href": "/old-house/corridor", "type": "GET" }],
-    };
+    const expectedHouse = { "href": "/old-house/corridor", "type": "GET" };
+    const expectedYard = { "href": "/", "type": "GET" };
 
     await request.get("/old-house")
       .expect(200)
       .then((response: IResponse) => {
-        assertObjectMatch(response.body, expected);
+        assertArrayIncludes(response.body.links, [expectedHouse]);
+        assertArrayIncludes(response.body.links, [expectedYard]);
       });
   });
 });
