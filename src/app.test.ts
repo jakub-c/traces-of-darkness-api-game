@@ -3,12 +3,12 @@ import {
   AssertionError,
   assertObjectMatch,
   assertStringIncludes,
-} from "https://deno.land/std@0.144.0/testing/asserts.ts";
+} from "https://deno.land/std@0.153.0/testing/asserts.ts";
 import {
   beforeEach,
   describe,
   it,
-} from "https://deno.land/std@0.144.0/testing/bdd.ts";
+} from "https://deno.land/std@0.153.0/testing/bdd.ts";
 import {
   IResponse,
   SuperDeno,
