@@ -45,6 +45,17 @@ describe("root endpoint /", () => {
       });
   });
 
+  it("doesn't have HATEOAS root link, because it is a root link itself", async () => {
+    await request.get("/")
+      .expect(200)
+      .then((response: IResponse) => {
+        const rootLinkExists = response.body.links.some((
+          el: { href: string },
+        ) => el.href === "" || el.href === "/");
+        assert(rootLinkExists === false);
+      });
+  });
+
   it("returns image when requested via content-type", async () => {
     await request.get("/")
       .set("Accept", "image/*")
