@@ -26,13 +26,15 @@ beforeEach(async () => {
 });
 
 describe("root endpoint /", () => {
+  const endpoint = "/";
+
   it("has the right 'links' response", async () => {
     const expected = {
       "name": "The yard",
       "links": [{ "href": "/old-house", "type": "GET" }],
     };
 
-    await request.get("/")
+    await request.get(endpoint)
       // .set("Accept", "application/json")
       .expect(200)
       .then((response: IResponse) => {
@@ -46,18 +48,18 @@ describe("root endpoint /", () => {
   });
 
   it("doesn't have HATEOAS root link, because it is a root endpoint itself", async () => {
-    await request.get("/")
+    await request.get(endpoint)
       .expect(200)
       .then((response: IResponse) => {
-        const rootLinkExists = response.body.links.some((
+        const rootLinkExistsInHATEOAS = response.body.links.some((
           el: { href: string },
         ) => el.href === "" || el.href === "/");
-        assert(rootLinkExists === false);
+        assert(rootLinkExistsInHATEOAS === false);
       });
   });
 
   it("returns image when requested via content-type", async () => {
-    await request.get("/")
+    await request.get(endpoint)
       .set("Accept", "image/*")
       .expect(200)
       .then((response: IResponse) => {
@@ -75,8 +77,10 @@ describe("root endpoint /", () => {
 });
 
 describe("/old-house enpoint", () => {
+  const endpoint = "/old-house";
+
   it("has Old house name property", async () => {
-    await request.get("/old-house")
+    await request.get(endpoint)
       .expect(200)
       .then((response: IResponse) => {
         assertEquals(response.body.name, "Old House");
@@ -87,7 +91,7 @@ describe("/old-house enpoint", () => {
     const expectedHouse = { "href": "/old-house/corridor", "type": "GET" };
     const expectedYard = { "href": "/", "type": "GET" };
 
-    await request.get("/old-house")
+    await request.get(endpoint)
       .expect(200)
       .then((response: IResponse) => {
         assertArrayIncludes(response.body.links, [expectedHouse]);
