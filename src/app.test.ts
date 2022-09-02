@@ -98,6 +98,17 @@ describe("/old-house enpoint", () => {
         assertArrayIncludes(response.body.links, [expectedYard]);
       });
   });
+
+  it("contains HATEOAS link to the previous root location", async () => {
+    await request.get(endpoint)
+      .expect(200)
+      .then((response: IResponse) => {
+        const rootLinkExistsInHATEOAS = response.body.links.some((
+          el: { href: string },
+        ) => el.href === "" || el.href === "/");
+        assert(rootLinkExistsInHATEOAS);
+      });
+  });
 });
 
 describe("/corridor enpoint", () => {
