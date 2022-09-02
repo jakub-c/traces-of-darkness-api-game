@@ -45,7 +45,7 @@ describe("root endpoint /", () => {
       });
   });
 
-  it("doesn't have HATEOAS root link, because it is a root link itself", async () => {
+  it("doesn't have HATEOAS root link, because it is a root endpoint itself", async () => {
     await request.get("/")
       .expect(200)
       .then((response: IResponse) => {
