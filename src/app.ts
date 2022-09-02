@@ -5,6 +5,18 @@ export const app = new Application();
 
 const router = new Router();
 
+function findParentLocationEndpoint(
+  currentLocation: mapLocation,
+  mapToLookThrough: mapLocation,
+) {
+  const parentFound = mapToLookThrough.connections.some((el) =>
+    el.name === currentLocation.name
+  );
+  if (parentFound && mapToLookThrough.endpoint === "") return "/";
+  else if (parentFound) return mapToLookThrough.endpoint;
+  return "null";
+}
+
 function generateLocationEndpoint(location: mapLocation): void {
   const HATEOASlinks = location.connections.map((nextArea: mapLocation) => {
     /* if there's more than one backslash like /// in a url,
@@ -21,6 +33,14 @@ function generateLocationEndpoint(location: mapLocation): void {
 
     return link;
   });
+
+  const previousLocationEndpoint = findParentLocationEndpoint(location, yard);
+  if (previousLocationEndpoint !== "null") {
+    HATEOASlinks.push({
+      "href": previousLocationEndpoint,
+      "type": "GET",
+    });
+  }
 
   router.get(`/${location.endpoint}`, async (context) => {
     if (
