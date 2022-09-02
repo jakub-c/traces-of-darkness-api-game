@@ -53,7 +53,7 @@ describe("root endpoint /", () => {
       .then((response: IResponse) => {
         const rootLinkExistsInHATEOAS = response.body.links.some((
           el: { href: string },
-        ) => el.href === "" || el.href === "/");
+        ) => el.href === "/");
         assert(rootLinkExistsInHATEOAS === false);
       });
   });
@@ -105,7 +105,7 @@ describe("/old-house enpoint", () => {
       .then((response: IResponse) => {
         const rootLinkExistsInHATEOAS = response.body.links.some((
           el: { href: string },
-        ) => el.href === "" || el.href === "/");
+        ) => el.href === "/");
         assert(rootLinkExistsInHATEOAS);
       });
   });
