@@ -16,7 +16,8 @@ const corridor: mapLocation = {
 const house: mapLocation = {
   "endpoint": "old-house",
   "name": "Old House",
-  "description": "....",
+  "description":
+    "You approach the house. It looks tidy. Windows and a facade seem new, yet the building itself looks at least couple of decades old. You feel a sense of a strange force keeping this dwelling alive. This place looks like a museum piece, once built now kept under an invisible glass protecting it from deterioration.",
   "connections": [corridor],
 };
 
