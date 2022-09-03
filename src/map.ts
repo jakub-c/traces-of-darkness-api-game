@@ -6,10 +6,13 @@ export type mapLocation = {
   connections: mapLocation[];
 };
 
-const corridor: mapLocation = {
-  "endpoint": "corridor",
-  "name": "corridor",
-  "description": "....",
+const hallway: mapLocation = {
+  "endpoint": "hallway",
+  "name": "A Hallway",
+  "description":
+    "You enter a hallway. There's noting in particular that draws your attention. This place seams dead empty, so empty that it's hard to image living here.",
+  "image":
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/or/or0100/or0126/photos/129649pv.jpg",
   "connections": [],
 };
 
@@ -18,7 +21,7 @@ const house: mapLocation = {
   "name": "Old House",
   "description":
     "You approach the house. It looks tidy. Windows and a facade seem new, yet the building itself looks at least couple of decades old. You feel a sense of a strange force keeping this dwelling alive. This place looks like a museum piece, once built now kept under an invisible glass protecting it from deterioration.",
-  "connections": [corridor],
+  "connections": [hallway],
 };
 
 export const yard: mapLocation = {
