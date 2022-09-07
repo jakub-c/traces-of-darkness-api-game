@@ -88,7 +88,7 @@ describe("/old-house enpoint", () => {
   });
 
   it("has the right 'links' response", async () => {
-    const expectedHouse = { "href": "/old-house/corridor", "type": "GET" };
+    const expectedHouse = { "href": "/old-house/hallway", "type": "GET" };
     const expectedYard = { "href": "/", "type": "GET" };
 
     await request.get(endpoint)
@@ -111,9 +111,9 @@ describe("/old-house enpoint", () => {
   });
 });
 
-describe("/corridor enpoint", () => {
+describe("/hallway enpoint", () => {
   it("returns 200 reponse", async () => {
-    await request.get("/corridor")
+    await request.get("/old-house/hallway")
       .expect(200);
   });
 });
