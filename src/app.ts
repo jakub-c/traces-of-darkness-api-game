@@ -17,13 +17,18 @@ function findParentLocationEndpoint(
   return "null";
 }
 
-function generateLocationEndpoint(location: mapLocation): void {
+function generateLocationEndpoint(location: mapLocation, slug: string): void {
+  function removeRepeatedSlashes(url: string) {
+    /* if there's more than one backslash like /// in a url,
+    replace it with a single one */
+    return url.replace(/\/+/, "/");
+  }
+
   const HATEOASlinks = location.connections.map((nextArea: mapLocation) => {
     /* if there's more than one backslash like /// in a url,
     replace it with a single one */
-    const url = `/${location.endpoint}/${nextArea.endpoint}`.replace(
-      /\/+/,
-      "/",
+    const url = removeRepeatedSlashes(
+      `/${location.endpoint}/${nextArea.endpoint}`,
     );
 
     const link = {
@@ -42,7 +47,11 @@ function generateLocationEndpoint(location: mapLocation): void {
     });
   }
 
-  router.get(`/${location.endpoint}`, async (context) => {
+  const currentUrlEnpoint = removeRepeatedSlashes(
+    `${slug}/${location.endpoint}`,
+  );
+
+  router.get(currentUrlEnpoint, async (context) => {
     if (
       context.request.accepts()?.some((el) => el.includes("image/*")) &&
       location.image
@@ -61,11 +70,14 @@ function generateLocationEndpoint(location: mapLocation): void {
   });
 
   return location.connections.forEach((connection: mapLocation) =>
-    generateLocationEndpoint(connection)
+    generateLocationEndpoint(
+      connection,
+      currentUrlEnpoint,
+    )
   );
 }
 
-generateLocationEndpoint(yard);
+generateLocationEndpoint(yard, "");
 
 app.use(router.routes());
 app.use(router.allowedMethods());
