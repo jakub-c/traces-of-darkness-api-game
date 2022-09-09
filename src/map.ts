@@ -6,6 +6,37 @@ export type mapLocation = {
   connections: mapLocation[];
 };
 
+const diningRoomCabinet: mapLocation = {
+  "endpoint": "cabinet",
+  "name": "A cabinet",
+  "description":
+    "The cabinet you're looking at seems brand new, it hasn't collected any dust yet. You don't find anything there besides a signle glass.",
+  "connections": [],
+};
+
+const diningRoomPlate: mapLocation = {
+  "endpoint": "plate",
+  "name": "A plate",
+  "description":
+    "This is an ordinary plate. On the back you see a trademark: Arkham dinnerware.",
+  connections: [],
+};
+
+const diningRoomTable: mapLocation = {
+  "endpoint": "table",
+  "name": "A table",
+  "description": "White cloth decorates this table",
+  "connections": [diningRoomPlate],
+};
+
+const diningRoom: mapLocation = {
+  "endpoint": "dining-room",
+  "name": "A dining room",
+  "description":
+    "This room looks like a catefuly crafted theatrical scenery. Only a few essential items are here.",
+  "connections": [diningRoomTable, diningRoomCabinet],
+};
+
 const hallway: mapLocation = {
   "endpoint": "hallway",
   "name": "A Hallway",
@@ -13,7 +44,7 @@ const hallway: mapLocation = {
     "You enter a hallway. There's noting in particular that draws your attention. This place seams dead empty, so empty that it's hard to image living here.",
   "image":
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/or/or0100/or0126/photos/129649pv.jpg",
-  "connections": [],
+  "connections": [diningRoom],
 };
 
 const house: mapLocation = {
