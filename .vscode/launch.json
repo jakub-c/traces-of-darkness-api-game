@@ -6,7 +6,20 @@
   "configurations": [
     {
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Deno Tests",
+      "type": "node",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": [
+        "task",
+        "t",
+        "--inspect-brk",
+      ],
+      "attachSimplePort": 9229
+    },
+    {
+      "request": "launch",
+      "name": "Deno Program",
       "type": "node",
       "program": "${workspaceFolder}/src/server.ts",
       "cwd": "${workspaceFolder}",
