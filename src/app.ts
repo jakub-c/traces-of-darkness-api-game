@@ -15,9 +15,7 @@ function generateLocationEndpoint(
     return url.replace(/\/+/, "/");
   }
 
-  const currentUrlEnpoint = removeRepeatedSlashes(
-    `/${slug.join("/")}/${location.endpoint}`,
-  );
+  const currentUrlEnpoint = `${slug.join("/")}/${location.endpoint}`;
 
   const HATEOASlinks = location.connections.map((nextArea: mapLocation) => {
     /* if there's more than one backslash like /// in a url,
