@@ -17,7 +17,7 @@ import {
   superoak,
 } from "https://deno.land/x/superoak@4.7.0/mod.ts";
 
-import { app } from "./app.ts";
+import { app } from "./../../app.ts";
 
 let request: SuperDeno;
 
@@ -112,8 +112,18 @@ describe("/old-house enpoint", () => {
 });
 
 describe("/hallway enpoint", () => {
-  it("returns 200 reponse", async () => {
+  const expectedDiningRoom = {
+    "href": "/old-house/hallway/dining-room",
+    "type": "GET",
+  };
+  const expectedOldHouse = { "href": "/old-house", "type": "GET" };
+
+  it("has the right 'links' response", async () => {
     await request.get("/old-house/hallway")
-      .expect(200);
+      .expect(200)
+      .then((response: IResponse) => {
+        assertArrayIncludes(response.body.links, [expectedDiningRoom]);
+        assertArrayIncludes(response.body.links, [expectedOldHouse]);
+      });
   });
 });

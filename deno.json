@@ -2,7 +2,7 @@
   "tasks": {
     "server": "deno run --allow-net --allow-read --allow-env src/server.ts",
     "server:watch": "deno run --allow-net --allow-read --allow-env --watch src/server.ts",
-    "t": "deno test --allow-net",
-    "t:watch": "deno test --watch --allow-net"
+    "t:e2e": "deno test src/tests/integration --allow-net",
+    "t:watch": "deno test --allow-net --allow-read --watch"
   }
 }
