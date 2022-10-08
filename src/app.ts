@@ -5,30 +5,25 @@ export const app = new Application();
 
 const router = new Router();
 
-function findParentLocationEndpoint(
-  currentLocation: mapLocation,
-  mapToLookThrough: mapLocation,
-) {
-  const parentFound = mapToLookThrough.connections.some((el) =>
-    el.name === currentLocation.name
-  );
-  if (parentFound && mapToLookThrough.endpoint === "") return "/";
-  else if (parentFound) return mapToLookThrough.endpoint;
-  return "null";
-}
-
-function generateLocationEndpoint(location: mapLocation, slug: string): void {
+function generateLocationEndpoint(
+  location: mapLocation,
+  slug: string[],
+): void {
   function removeRepeatedSlashes(url: string) {
     /* if there's more than one backslash like /// in a url,
     replace it with a single one */
     return url.replace(/\/+/, "/");
   }
 
+  const currentUrlEnpoint = removeRepeatedSlashes(
+    `/${slug.join("/")}/${location.endpoint}`,
+  );
+
   const HATEOASlinks = location.connections.map((nextArea: mapLocation) => {
     /* if there's more than one backslash like /// in a url,
     replace it with a single one */
     const url = removeRepeatedSlashes(
-      `/${location.endpoint}/${nextArea.endpoint}`,
+      `${currentUrlEnpoint}/${nextArea.endpoint}`,
     );
 
     const link = {
@@ -39,17 +34,14 @@ function generateLocationEndpoint(location: mapLocation, slug: string): void {
     return link;
   });
 
-  const previousLocationEndpoint = findParentLocationEndpoint(location, yard);
-  if (previousLocationEndpoint !== "null") {
+  if (slug.length > 0) {
     HATEOASlinks.push({
-      "href": previousLocationEndpoint,
+      "href": removeRepeatedSlashes(
+        `/${slug.join("/")}`,
+      ),
       "type": "GET",
     });
   }
-
-  const currentUrlEnpoint = removeRepeatedSlashes(
-    `${slug}/${location.endpoint}`,
-  );
 
   router.get(currentUrlEnpoint, async (context) => {
     if (
@@ -72,12 +64,12 @@ function generateLocationEndpoint(location: mapLocation, slug: string): void {
   return location.connections.forEach((connection: mapLocation) =>
     generateLocationEndpoint(
       connection,
-      currentUrlEnpoint,
+      [...slug, location.endpoint],
     )
   );
 }
 
-generateLocationEndpoint(yard, "");
+generateLocationEndpoint(yard, []);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
