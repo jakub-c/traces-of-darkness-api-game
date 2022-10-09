@@ -9,23 +9,13 @@ function generateLocationEndpoint(
   location: mapLocation,
   slug: string[],
 ): void {
-  function removeRepeatedSlashes(url: string) {
-    /* if there's more than one backslash like /// in a url,
-    replace it with a single one */
-    return url.replace(/\/+/, "/");
-  }
-
-  const currentUrlEnpoint = `${slug.join("/")}/${location.endpoint}`;
+  const currentUrlEnpoint = [...slug, location.endpoint].join("/");
 
   const HATEOASlinks = location.connections.map((nextArea: mapLocation) => {
-    /* if there's more than one backslash like /// in a url,
-    replace it with a single one */
-    const url = removeRepeatedSlashes(
-      `${currentUrlEnpoint}/${nextArea.endpoint}`,
-    );
+    const nextAreaUrl = `${currentUrlEnpoint}/${nextArea.endpoint}`;
 
     const link = {
-      "href": url,
+      "href": nextAreaUrl,
       "type": "GET",
     };
 
@@ -34,9 +24,7 @@ function generateLocationEndpoint(
 
   if (slug.length > 0) {
     HATEOASlinks.push({
-      "href": removeRepeatedSlashes(
-        `/${slug.join("/")}`,
-      ),
+      "href": `${slug.join("/") || "/"}`,
       "type": "GET",
     });
   }
