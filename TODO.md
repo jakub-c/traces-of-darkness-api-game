@@ -2,6 +2,7 @@
 
 I work on this project in short focused sessions, this list's supposed to keep me on track when I revisit the codebase
 
+- [ ] add handling of failed `fetch` request
 - [x] turn slug into an array
 - ~~[ ] test `findParentLocationEndpoint`~~
 - [x] ~~create nested URL structure for the API like: `old-house/hallway`~~
