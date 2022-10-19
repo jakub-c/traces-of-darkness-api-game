@@ -47,6 +47,12 @@ function generateLocationEndpoint(
     }
   });
 
+  router.options(currentUrlEnpoint, (context) => {
+    const allowedRequestHeaders = ["application/json"];
+    if (location.image) allowedRequestHeaders.push("image/jpeg");
+    context.response.body = allowedRequestHeaders.join(",");
+  });
+
   return location.connections.forEach((connection: mapLocation) =>
     generateLocationEndpoint(
       connection,

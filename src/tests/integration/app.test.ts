@@ -58,6 +58,21 @@ describe("root endpoint /", () => {
       });
   });
 
+  it("responds to OPTIONS request with image/ and application/json", async () => {
+    await request.options(endpoint)
+      .expect(200)
+      .then((response: IResponse) => {
+        assertStringIncludes(
+          String(response.text),
+          "image/",
+        );
+        assertStringIncludes(
+          String(response.text),
+          "application/json",
+        );
+      });
+  });
+
   it("returns image when requested via content-type", async () => {
     await request.get(endpoint)
       .set("Accept", "image/jpeg")
