@@ -31,7 +31,7 @@ function generateLocationEndpoint(
 
   router.get(currentUrlEnpoint, async (context) => {
     if (
-      context.request.accepts()?.some((el) => el.includes("image/*")) &&
+      context.request.accepts()?.some((el) => el.includes("image/jpeg")) &&
       location.image
     ) {
       const resp = await fetch(location.image);

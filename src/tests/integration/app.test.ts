@@ -60,7 +60,7 @@ describe("root endpoint /", () => {
 
   it("returns image when requested via content-type", async () => {
     await request.get(endpoint)
-      .set("Accept", "image/*")
+      .set("Accept", "image/jpeg")
       .expect(200)
       .then((response: IResponse) => {
         if (response.text.length < 1000) {
