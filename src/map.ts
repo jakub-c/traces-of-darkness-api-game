@@ -6,6 +6,14 @@ export type mapLocation = {
   connections: mapLocation[];
 };
 
+const library: mapLocation = {
+  "endpoint": "library",
+  "name": "The library",
+  "description":
+    "You're standing in a small room that seems to be a prospective library. There are shelves, but no books. No books but one.",
+  "connections": [],
+};
+
 const diningRoomCabinet: mapLocation = {
   "endpoint": "cabinet",
   "name": "A cabinet",
@@ -44,7 +52,7 @@ const hallway: mapLocation = {
     "You enter a hallway. There's noting in particular that draws your attention. This place seams dead empty, so empty that it's hard to image living here.",
   "image":
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/or/or0100/or0126/photos/129649pv.jpg",
-  "connections": [diningRoom],
+  "connections": [diningRoom, library],
 };
 
 const house: mapLocation = {
