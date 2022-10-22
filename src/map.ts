@@ -3,7 +3,16 @@ export type mapLocation = {
   name: string;
   description: string;
   image?: string;
+  input?: string;
   connections: mapLocation[];
+};
+
+const book: mapLocation = {
+  "endpoint": "book",
+  "name": "Unknown book",
+  "description":
+    "The book is written in an aphabet of unkonwn origin. On the first page you spot a drawing. It looks like a circle on fire with number 7 right in the middle.",
+  "connections": [],
 };
 
 const library: mapLocation = {
@@ -11,6 +20,15 @@ const library: mapLocation = {
   "name": "The library",
   "description":
     "You're standing in a small room that seems to be a prospective library. There are shelves, but no books. No books but one.",
+  "connections": [book],
+};
+
+const fireplace: mapLocation = {
+  "endpoint": "fireplace",
+  "name": "A fireplace",
+  "description":
+    "You see ash and fait blue fire. It doesn't produce any heat. On the back wall there's a shape of a circle.",
+  "input": "7",
   "connections": [],
 };
 
@@ -42,7 +60,7 @@ const diningRoom: mapLocation = {
   "name": "A dining room",
   "description":
     "This room looks like a catefuly crafted theatrical scenery. Only a few essential items are here.",
-  "connections": [diningRoomTable, diningRoomCabinet],
+  "connections": [diningRoomTable, diningRoomCabinet, fireplace],
 };
 
 const hallway: mapLocation = {
