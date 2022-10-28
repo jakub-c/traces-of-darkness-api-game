@@ -142,3 +142,19 @@ describe("/hallway enpoint", () => {
       });
   });
 });
+
+describe("/fireplace enpoint", () => {
+  it("receives response when posting the right value", async () => {
+    const expected = {
+      "name": "The void",
+    };
+
+    await request.put("/old-house/hallway/dining-room/fireplace")
+      .expect(200)
+      .set("content-type", "text/plain")
+      .send("7")
+      .then((response: IResponse) => {
+        assertObjectMatch(response.body, expected);
+      });
+  });
+});
