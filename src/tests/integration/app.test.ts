@@ -157,4 +157,10 @@ describe("/fireplace enpoint", () => {
         assertObjectMatch(response.body, expected);
       });
   });
+
+  it("receives 403 when posting wrong value", async () => {
+    await request.put("/old-house/hallway/dining-room/fireplace")
+      .send("1")
+      .expect(403);
+  });
 });
