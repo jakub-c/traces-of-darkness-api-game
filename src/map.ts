@@ -4,6 +4,10 @@ export type mapLocation = {
   description: string;
   image?: string;
   input?: string;
+  input_response?: {
+    name: string;
+    description: string;
+  };
   connections: mapLocation[];
 };
 
@@ -25,10 +29,14 @@ const library: mapLocation = {
 
 const fireplace: mapLocation = {
   "endpoint": "fireplace",
-  "name": "A fireplace",
+  "name": "The fireplace",
   "description":
     "You see ash and fait blue fire. It doesn't produce any heat. On the back wall there's a shape of a circle.",
   "input": "7",
+  "input_response": {
+    "name": "The void",
+    "description": "you see darkness...",
+  },
   "connections": [],
 };
 

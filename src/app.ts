@@ -53,6 +53,23 @@ function generateLocationEndpoint(
     context.response.body = allowedRequestHeaders.join(",");
   });
 
+  if (location.input && location.input_response) {
+    router.put(currentUrlEnpoint, async (context) => {
+      const reqBody = await context.request.body().value;
+      if (reqBody === location.input) {
+        context.response.body = location.input_response;
+      } else {
+        context.response.status = 403;
+        context.response.type = "application/json";
+        context.response.body = {
+          "name": location.name,
+          "description": "Your action doesn't produce any result.",
+          "links": HATEOASlinks,
+        };
+      }
+    });
+  }
+
   return location.connections.forEach((connection: mapLocation) =>
     generateLocationEndpoint(
       connection,
