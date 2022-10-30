@@ -35,7 +35,8 @@ const fireplace: mapLocation = {
   "input": "7",
   "input_response": {
     "name": "The void",
-    "description": "you see darkness...",
+    "description":
+      "Everything goes dark. From the darkness the stars emege. You realise you're looking at the vast cosmic space. It's cold and diffent from anything you've ever seen. You realise you don't have the body, you're just a point of consciousness floating in emptyness. There are no feelings, no thoughts, no events. Bit by bit you dissolve into the stillnes of cosmos. Until there's no you anymore...",
   },
   "connections": [],
 };
@@ -56,11 +57,19 @@ const diningRoomPlate: mapLocation = {
   connections: [],
 };
 
+const note: mapLocation = {
+  "endpoint": "note",
+  "name": "A note",
+  "description":
+    "'We live on a placid island of ignorance in the midst of black seas of infinity, and it was not meant that we should voyage far.' Who wrote this, you think to yourself.",
+  connections: [],
+};
+
 const diningRoomTable: mapLocation = {
   "endpoint": "table",
   "name": "A table",
   "description": "White cloth decorates this table",
-  "connections": [diningRoomPlate],
+  "connections": [diningRoomPlate, note],
 };
 
 const diningRoom: mapLocation = {
