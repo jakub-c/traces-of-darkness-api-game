@@ -32,6 +32,8 @@ const fireplace: mapLocation = {
   "name": "The fireplace",
   "description":
     "You see ash and fait blue fire. It doesn't produce any heat. On the back wall there's a shape of a circle.",
+  "image":
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/nj/nj0000/nj0080/photos/107329pv.jpg",
   "input": "7",
   "input_response": {
     "name": "The void",
@@ -45,7 +47,7 @@ const diningRoomCabinet: mapLocation = {
   "endpoint": "cabinet",
   "name": "A cabinet",
   "description":
-    "The cabinet you're looking at seems brand new, it hasn't collected any dust yet. You don't find anything there besides a signle glass.",
+    "The cabinet you're looking at seems brand new, it hasn't collected any dust yet. You don't find anything there besides a single glass.",
   "connections": [],
 };
 
@@ -77,6 +79,8 @@ const diningRoom: mapLocation = {
   "name": "A dining room",
   "description":
     "This room looks like a catefuly crafted theatrical scenery. Only a few essential items are here.",
+  "image":
+    "https://tile.loc.gov/storage-services/service/pnp/hec/33800/33881v.jpg",
   "connections": [diningRoomTable, diningRoomCabinet, fireplace],
 };
 
@@ -95,6 +99,8 @@ const house: mapLocation = {
   "name": "Old House",
   "description":
     "You approach the house. It looks tidy. Windows and a facade seem new, yet the building itself looks at least couple of decades old. You feel a sense of a strange force keeping this dwelling alive. This place looks like a museum piece, once built now kept under an invisible glass protecting it from deterioration.",
+  "image":
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/pa/pa3900/pa3905/photos/200867pv.jpg",
   "connections": [hallway],
 };
 
@@ -104,6 +110,6 @@ export const yard: mapLocation = {
   "description":
     "It's a cold evening somewhere in New England. You are standing on the premises of a mansion that seems neither inhabited nor abandoned. The place feels like it's frozen in time. Did anyone ever live here? The unusualness of the situation makes you ponder turning away, going back to the Ford Model T parked just 30 yards from where you stand. Yet your thirst for knowledge pushes you forward. You realise you just took a step bringing you closer to the unknown. Is it a coincidence that you finished reading Faust just a few days ago? Goethe was a Freemason after all... Would he approve your quest?",
   "image":
-    "https://tile.loc.gov/storage-services/service/pnp/fsa/8b23000/8b23400/8b23404v.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/pa/pa3900/pa3904/photos/200831pv.jpg",
   "connections": [house],
 };
