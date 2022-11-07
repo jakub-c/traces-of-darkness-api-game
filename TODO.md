@@ -3,9 +3,9 @@
 I work on this project in short focused sessions, this list's supposed to keep
 me on track when I revisit the codebase
 
-- [ ] add POST endpoints to HATEOASlinks
 - [ ] write tests to support `options` on all endpoints
 - [ ] add handling of failed `fetch` request
+- [x] ~~add POST endpoints to HATEOASlinks~~
 - [x] ~~support `OPTIONS` request method~~
 - [x] turn slug into an array
 - [x] ~~create nested URL structure for the API like: `old-house/hallway`~~

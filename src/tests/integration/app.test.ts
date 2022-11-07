@@ -165,4 +165,14 @@ describe("/fireplace enpoint", () => {
       .send("1")
       .expect(403);
   });
+
+  it("contains POST HATEOAS link", async () => {
+    await request.get(endpoint)
+      .then((response: IResponse) => {
+        const postLinkExistsInHATEOAS = response.body.links.some((
+          el: { type: string },
+        ) => el.type === "POST");
+        assert(postLinkExistsInHATEOAS);
+      });
+  });
 });

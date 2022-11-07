@@ -22,6 +22,13 @@ function generateLocationEndpoint(
     return link;
   });
 
+  if (location.input) {
+    HATEOASlinks.push({
+      "href": currentUrlEnpoint,
+      "type": "POST",
+    });
+  }
+
   if (slug.length > 0) {
     HATEOASlinks.push({
       "href": `${slug.join("/") || "/"}`,
