@@ -144,12 +144,14 @@ describe("/hallway enpoint", () => {
 });
 
 describe("/fireplace enpoint", () => {
+  const endpoint = "/old-house/hallway/dining-room/fireplace";
+
   it("receives response when posting the right value", async () => {
     const expected = {
       "name": "The void",
     };
 
-    await request.put("/old-house/hallway/dining-room/fireplace")
+    await request.put(endpoint)
       .expect(200)
       .set("content-type", "text/plain")
       .send("7")
@@ -159,7 +161,7 @@ describe("/fireplace enpoint", () => {
   });
 
   it("receives 403 when posting wrong value", async () => {
-    await request.put("/old-house/hallway/dining-room/fireplace")
+    await request.put(endpoint)
       .send("1")
       .expect(403);
   });
