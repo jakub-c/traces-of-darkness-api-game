@@ -63,11 +63,11 @@ describe("root endpoint /", () => {
       .expect(200)
       .then((response: IResponse) => {
         assertStringIncludes(
-          String(response.text),
+          String(response.header["allow"]),
           "image/",
         );
         assertStringIncludes(
-          String(response.text),
+          String(response.header["allow"]),
           "application/json",
         );
       });
