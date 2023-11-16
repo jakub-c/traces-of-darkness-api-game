@@ -58,6 +58,8 @@ function generateLocationEndpoint(
     const allowedRequestHeaders = ["application/json"];
     if (location.image) allowedRequestHeaders.push("image/jpeg");
     context.response.headers.set("Allow", allowedRequestHeaders.join(","));
+    context.response.status = 200;
+
   });
 
   if (location.input && location.input_response) {
