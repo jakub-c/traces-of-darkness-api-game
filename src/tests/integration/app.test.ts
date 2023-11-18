@@ -35,7 +35,6 @@ describe("root endpoint /", () => {
     };
 
     await request.get(endpoint)
-      // .set("Accept", "application/json")
       .expect(200)
       .then((response: IResponse) => {
         assertStringIncludes(
