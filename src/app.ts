@@ -59,6 +59,10 @@ function generateLocationEndpoint(
     if (location.image) acceptedContentTypes.push("image/jpeg");
     context.response.body = `Accepted Content-Type values: ${acceptedContentTypes.join(",")}`
 
+    const allowRequestHeaders = ["GET"];
+    if (location.input) allowRequestHeaders.push("POST");
+    context.response.headers.set("Allow", allowRequestHeaders.join(","));
+
     context.response.status = 200;
 
   });
