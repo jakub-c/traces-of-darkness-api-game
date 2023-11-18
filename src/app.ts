@@ -55,9 +55,10 @@ function generateLocationEndpoint(
   });
 
   router.options(currentUrlEnpoint, (context) => {
-    const allowedRequestHeaders = ["application/json"];
-    if (location.image) allowedRequestHeaders.push("image/jpeg");
-    context.response.headers.set("Allow", allowedRequestHeaders.join(","));
+    const acceptedContentTypes = ["application/json"];
+    if (location.image) acceptedContentTypes.push("image/jpeg");
+    context.response.body = `Accepted Content-Type values: ${acceptedContentTypes.join(",")}`
+
     context.response.status = 200;
 
   });
