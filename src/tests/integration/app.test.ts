@@ -57,16 +57,16 @@ describe("root endpoint /", () => {
       });
   });
 
-  it("responds to OPTIONS request with image/ and application/json", async () => {
+  it("responds to OPTIONS request with body: image/ and application/json", async () => {
     await request.options(endpoint)
       .expect(200)
       .then((response: IResponse) => {
         assertStringIncludes(
-          String(response.header["allow"]),
+          String(response.text),
           "image/",
         );
         assertStringIncludes(
-          String(response.header["allow"]),
+          String(response.text),
           "application/json",
         );
       });
