@@ -88,6 +88,17 @@ describe("root endpoint /", () => {
         );
       });
   });
+
+  it("responds to OPTIONS request with header: allow GET", async () => {
+    await request.options(endpoint)
+      .expect(200)
+      .then((response: IResponse) => {
+        assertStringIncludes(
+          String(response.header["allow"]),
+          "GET",
+        );
+      });
+  });
 });
 
 describe("/old-house enpoint", () => {
